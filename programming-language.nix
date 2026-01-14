@@ -3,7 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     # go
-    (python313.withPackages(ps: with ps; [ pygobject3 ]))
+    # (python313.withPackages(ps: with ps; [ pygobject3 ]))
     uv
     # nodePackages_latest.nodejs
     # nodePackages_latest.pnpm
