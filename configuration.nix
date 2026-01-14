@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ 
+    ./hardware-configuration.nix 
+    ./gnome.nix
+  ];
 
   # Bootloader（UEFI 默认）
   boot.loader.systemd-boot.enable = true;
@@ -49,10 +52,10 @@ nix.settings = {
   # services.desktopManager.plasma6.enable = true;
 
   # GNOME（GNOME ISO 用）
-   services.xserver.enable = true;
-   services.xserver.displayManager.gdm.enable = true;
-   services.xserver.desktopManager.gnome.enable = true;
-
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+  
   # SSH 服务
   services.openssh.enable = true;
 
