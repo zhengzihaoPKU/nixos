@@ -2,18 +2,22 @@
   description = "zzh's NixOS Configuration";
 
   inputs = {
-      nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-      nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+     #  nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
      # rust-overlay.url = "github:oxalica/rust-overlay";
      # wezterm.url = "github:wez/wezterm?dir=nix";
      # nix-ai-tools.url = "github:numtide/nix-ai-tools";
      noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     }; 
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
  };
 
-  outputs = {self, nixpkgs, ... } @ inputs:
+  outputs = {self, nixpkgs, home-manager, ... } @ inputs:
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       # systems = [ "aarch64-linux" ];
@@ -23,16 +27,22 @@
         ./hardware-configuration.nix
         ./programming-language.nix
 	./gc.nix
-	# ./gnome.nix
+	./gnome.nix
         # ./open-ssh.nix
         ./nixpkgs.nix
 	./firewall.nix
-        ./hyprland.nix
+        # ./hyprland.nix
 	./nix-settings.nix
-	# ./noctalia.nix
 	./cpp-toolchain.nix
         # ./cuda-toolchain.nix
 	./fish-shell.nix
+	home-manager.nixosModules.home-manager{
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.zihao = import ./home.nix;
+          home-manager.extraSpecialArgs = inputs;
+        }
+        ./noctalia.nix
       ];
     };
   };
