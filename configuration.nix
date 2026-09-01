@@ -40,5 +40,5 @@
   services.openssh.enable = true;
 
   # 首次安装时的兼容基线；不要在升级 nixpkgs 时随意修改。
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }
