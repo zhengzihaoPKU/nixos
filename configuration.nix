@@ -1,17 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [ 
-    ./hardware-configuration.nix 
-    ./gnome.nix
-  ];
-
-  # Bootloader（UEFI 默认）
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # 主机名与网络
-  networking.hostName = "nixos";                  # 改成你喜欢的
+  # 网络；主机名放在每台设备自己的 host-configuration.nix 中。
   networking.networkmanager.enable = true;
 
   # 时区与中文支持
@@ -33,13 +23,12 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
     experimental-features = [ "nix-command" "flakes" ];
-};
+  };
 
-  # 普通用户（务必改用户名和初始密码）
-  users.users.zihao = {                            # ← 改成你的用户名
+  # 用户密码不进入 Nix store 或 Git；安装后使用 passwd 设置。
+  users.users.zihao = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    initialPassword = "awawzhengzihao01";                 # 登录后立即改密码！
   };
 
   # 基本软件包
@@ -49,20 +38,8 @@
     pkgs.opencode
   ];
 
-  # 桌面环境（根据下载的 ISO 启用一个）
-  
-  # KDE Plasma
-  # services.desktopManager.plasma6.enable = true;
-
-  # GNOME（GNOME ISO 用）
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-  
-  # SSH 服务
-
   services.openssh.enable = true;
 
-  # 系统版本（当前最新稳定版 25.11）
+  # 首次安装时的兼容基线；不要在升级 nixpkgs 时随意修改。
   system.stateVersion = "25.11";
 }

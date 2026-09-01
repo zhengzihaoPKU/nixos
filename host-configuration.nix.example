@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  networking.hostName = "replace-me";
+
+  # UEFI example. Replace this block with a GRUB configuration on BIOS systems.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+}

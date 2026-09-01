@@ -1,4 +1,4 @@
-{...}:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = [
@@ -8,6 +8,5 @@
     pkgs.cudaPackages.nccl
     pkgs.cudaPackages.cutlass
     pkgs.cudaPackages.tensorrt
-    pkgs.cudaPackages.cuda_nvcc
   ];
 }
