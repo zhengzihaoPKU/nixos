@@ -35,7 +35,6 @@
   environment.systemPackages = with pkgs; [
     vim git wget curl tree which fastfetch
     python313
-    pkgs.opencode
   ];
 
   services.openssh.enable = true;

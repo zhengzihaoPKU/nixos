@@ -22,11 +22,15 @@
         ./configuration.nix
         ./programming-language.nix
         ./gc.nix
-        ./gnome.nix
+        # ./gnome.nix
+        ./niri.nix
         ./nixpkgs.nix
         ./firewall.nix
         ./nix-settings.nix
         ./cpp-toolchain.nix
+        ./rust-toolchain.nix
+        ./java-toolchain.nix
+        ./clash-verge-rev.nix
         ./fish-shell.nix
         ./noctalia.nix
         home-manager.nixosModules.home-manager
